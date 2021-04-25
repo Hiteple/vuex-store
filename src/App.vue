@@ -1,21 +1,36 @@
 <template>
   <div id="app">
     <NavBar/>
-    <router-view/>
+    <NotificationContainer />
+    <router-view :key="$route.fullPath"/>
   </div>
 </template>
 
 <script>
-import NavBar from '@/components/NavBar.vue'
+import NavBar from '@/components/NavBar.vue';
+import NotificationContainer from './components/NotificationContainer';
 
 export default {
   components: {
-    NavBar
+    NavBar,
+    NotificationContainer
   }
 }
 </script>
 
 <style>
+
+@keyframes notificationEnter {
+   0% {
+      transform: translateX(200px);
+      opacity: 0;
+   }
+   100% {
+      transform: translate(0);
+      opacity: 1;
+   }
+}
+
 html {
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
@@ -94,11 +109,19 @@ small {
 .-text-primary {
   color: #39b982;
 }
+.-text-success {
+   color: #fff;
+   background: linear-gradient(to right, #2a7909, #00ff0a);
+   padding: 2px 20px;
+   border-radius: 30px;
+   animation: notificationEnter 1s ease;
+}
 .-text-base {
   color: #000;
 }
 .-text-error {
-  color: tomato;
+  color: #fff;
+  background-color: tomato;
 }
 .-text-gray {
   color: rgba(0, 0, 0, 0.5);
